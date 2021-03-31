@@ -19,7 +19,8 @@ module.exports = class {
             } else {
                 let s = await superagent.post('https://auth.aliyundrive.com/v2/account/token')
                     .send({
-                        refresh_token: refresh_token
+                        refresh_token: refresh_token,
+                        grant_type:"refresh_token"
                     })
                 let info = db('account').find({ user_id: s.body.user_id }).value()
                 if (!info) {
