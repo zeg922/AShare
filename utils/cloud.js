@@ -9,7 +9,7 @@ module.exports = class {
     async login(refresh_token) {
         try {
             if (!refresh_token) {
-                let s = await superagent.post('https://websv.aliyundrive.com/token/refresh')
+                let s = await superagent.post('https://auth.aliyundrive.com/v2/account/token')
                     .send({
                         refresh_token: this.info.refresh_token
                     })
@@ -17,7 +17,7 @@ module.exports = class {
                 this.info = db('account').find({ id: this.info.id }).assign(s.body).write();
                 return this.info
             } else {
-                let s = await superagent.post('https://websv.aliyundrive.com/token/refresh')
+                let s = await superagent.post('https://auth.aliyundrive.com/v2/account/token')
                     .send({
                         refresh_token: refresh_token
                     })
